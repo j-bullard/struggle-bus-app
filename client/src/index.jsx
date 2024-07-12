@@ -1,12 +1,18 @@
+import App from "@/components/App/App";
+import Header from "@/components/Header/Header";
 import { Fragment } from "react";
 import { createRoot } from "react-dom/client";
-import { BrowserRouter } from "react-router-dom";
+import { BrowserRouter as Router } from "react-router-dom";
 
 const container = document.getElementById("root");
 const root = createRoot(container);
 
 root.render(
   <Fragment>
-    <BrowserRouter></BrowserRouter>
-  </Fragment>
+    <Router>
+      <Header />
+      <App />
+      {/* <Footer /> */}
+    </Router>
+  </Fragment>,
 );
