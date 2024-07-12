@@ -2,7 +2,7 @@ const express = require("express");
 const cors = require("cors");
 const fleet = require("./data/fleet");
 
-const PORT = 3000;
+const PORT = 3001;
 
 const app = express();
 app.use(cors());
