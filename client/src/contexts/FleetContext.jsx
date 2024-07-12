@@ -1,9 +1,36 @@
-import React, { createContext, useContext, useState } from "react";
+import React, { createContext, useContext, useEffect, useState } from "react";
 
 export const FleetContext = createContext();
 
 export const FleetProvider = ({ children }) => {
   const [fleet, setFleet] = useState([]);
+
+  useEffect(() => {
+    const fetchFleet = async () => {
+      let result, error;
+
+      try {
+        const response = await fetch("/fleet");
+        if (!response.ok) {
+          throw new Error("Failed to fetch fleet");
+        }
+
+        result = await response.json();
+      } catch (err) {
+        error = err instanceof Error ? err.message : "An error occurred";
+      }
+
+      return { result, error };
+    };
+
+    fetchFleet().then(({ result, error }) => {
+      if (result) {
+        setFleet(result);
+      } else {
+        console.error(error);
+      }
+    });
+  }, []);
 
   const addToFleet = (vehicle) => {
     setFleet((prevFleet) => [...prevFleet, vehicle]);
