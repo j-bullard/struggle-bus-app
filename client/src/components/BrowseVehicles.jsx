@@ -1,10 +1,12 @@
 import { usDollar } from "@/utils/currency";
 import { useEffect, useState } from "react";
+
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
+import AddVehicleButton from "@/components/AddVehicleButton";
 
 const BrowseVehicles = () => {
-  const [selectedYear, setSelectedYear] = useState();
+  const [selectedYear, setSelectedYear] = useState(2020);
   const [selectedMake, setSelectedMake] = useState();
   const [selectedModel, setSelectedModel] = useState();
   const [years, _] = useState([2020, 2019, 2018, 2017, 2016, 2015]);
@@ -15,6 +17,9 @@ const BrowseVehicles = () => {
   const [trims, setTrims] = useState([]);
 
   useEffect(() => {
+    setSelectedMake("");
+    setTrims([]);
+
     const fetchMakes = async () => {
       if (!selectedYear) {
         setMakes([]);
@@ -30,7 +35,7 @@ const BrowseVehicles = () => {
   }, [selectedYear]);
 
   useEffect(() => {
-    setSelectedModel(undefined);
+    setSelectedModel("");
     setTrims([]);
 
     const fetchModels = async () => {
@@ -185,7 +190,7 @@ const BrowseVehicles = () => {
                   >
                     ℹ
                   </button>{" "}
-                  <button aria-label="Add trim to fleet">+</button>
+                  <AddVehicleButton trimId={trim.id} />
                 </td>
               </tr>
             ))}
