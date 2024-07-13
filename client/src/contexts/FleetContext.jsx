@@ -1,11 +1,12 @@
-import React, { createContext, useContext, useEffect, useState } from "react";
+import { useLocalStorage } from "@/hooks/useLocalStorage";
+import React, { createContext, useContext } from "react";
 
 export const FleetContext = createContext();
 
 export const FleetProvider = ({ children }) => {
-  const [fleet, setFleet] = useState([]);
+  const [fleet, setFleet] = useLocalStorage("fleet", []);
 
-  useEffect(() => {
+  /* useEffect(() => {
     const fetchFleet = async () => {
       let result, error;
 
@@ -30,7 +31,7 @@ export const FleetProvider = ({ children }) => {
         console.error(error);
       }
     });
-  }, []);
+  }, []); */
 
   const addToFleet = (vehicle) => {
     setFleet((prevFleet) => [...prevFleet, vehicle]);
