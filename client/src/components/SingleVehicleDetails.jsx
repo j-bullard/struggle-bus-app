@@ -25,6 +25,9 @@ const SingleVehicleDetails = () => {
           {carDetails.year} {carDetails.make_model.make.name}{" "}
           {carDetails.make_model.name}
         </h1>
+        <p>
+          <strong>{carDetails.description}</strong>
+        </p>
         <img src="/images/MAter.jpg" alt="Car Image" />
         <ul className="DetailsList">
           <li>Body Type: {carDetails.make_model_trim_body.type}</li>
