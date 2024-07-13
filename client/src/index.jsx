@@ -1,3 +1,4 @@
+import "@/styles/global.css";
 import { App } from "@/components/App";
 import { Fragment } from "react";
 import { createRoot } from "react-dom/client";
