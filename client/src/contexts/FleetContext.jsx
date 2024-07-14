@@ -16,7 +16,6 @@ export const FleetProvider = ({ children }) => {
         }
 
         result = await response.json();
-        console.log(result);
       } catch (err) {
         error = err instanceof Error ? err.message : "An error occurred";
       }
