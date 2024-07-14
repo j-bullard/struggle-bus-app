@@ -1,16 +1,36 @@
-import { Link } from "react-router-dom";
+import { cn } from "@/utils/cn";
+import { NavLink } from "react-router-dom";
 
 const Header = () => {
   return (
-    <header>
-      <Link to="/">Struggle Bus</Link>
+    <header className="flex-row align-center space-between">
+      <h1>Struggle Bus</h1>
 
-      <nav>
-        <Link to="/" role="button">
+      <nav className="flex-row align-center" style={{ gap: "20px" }}>
+        <NavLink
+          to="/"
+          className={({ isActive }) =>
+            cn("button", !isActive && "muted-button")
+          }
+        >
           Fleet
-        </Link>
-        <Link to="/browse">Browse</Link>
-        <Link to="/news">News</Link>
+        </NavLink>
+        <NavLink
+          to="/browse"
+          className={({ isActive }) =>
+            cn("button", !isActive && "muted-button")
+          }
+        >
+          Browse
+        </NavLink>
+        <NavLink
+          to="/news"
+          className={({ isActive }) =>
+            cn("button", !isActive && "muted-button")
+          }
+        >
+          News
+        </NavLink>
       </nav>
     </header>
   );

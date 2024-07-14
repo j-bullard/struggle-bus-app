@@ -6,7 +6,9 @@ const AddVehicleButton = ({ trimId }) => {
 
   return (
     <>
-      <button onClick={() => setOpen(true)}>+</button>
+      <button className="accent-button" onClick={() => setOpen(true)}>
+        +
+      </button>
       <AddVehicleDialog
         isOpen={open}
         trimId={trimId}

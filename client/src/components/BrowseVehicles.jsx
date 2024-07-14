@@ -83,119 +83,122 @@ const BrowseVehicles = () => {
 
   return (
     <div>
-      <h1>Approved Vehicle List</h1>
+      <h4>Approved Vehicle List</h4>
 
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="year">Year</label>
-          <select
-            name="year"
-            id="year"
-            value={selectedYear}
-            onChange={(e) => {
-              setSelectedMake("");
-              setSelectedModel("");
-              setTrims([]);
-              setSelectedYear(e.currentTarget.value);
-            }}
+      <div className="container">
+        <form
+          onSubmit={handleSubmit}
+          className="flex-row"
+          style={{ gap: "20px" }}
+        >
+          <div className="one-fourth" style={{ flex: 1 }}>
+            <label htmlFor="year">Year</label>
+            <select
+              name="year"
+              id="year"
+              value={selectedYear}
+              onChange={(e) => {
+                setSelectedMake("");
+                setSelectedModel("");
+                setTrims([]);
+                setSelectedYear(e.currentTarget.value);
+              }}
+            >
+              <option value="">Select Year</option>
+              {years.map((year) => (
+                <option key={year}>{year}</option>
+              ))}
+            </select>
+          </div>
+
+          <div className="one-fourth" style={{ flex: 1 }}>
+            <label htmlFor="makes">Make</label>
+            <select
+              name="makes"
+              id="makes"
+              value={selectedMake}
+              disabled={!Boolean(makes.length)}
+              onChange={(e) => {
+                setSelectedModel("");
+                setTrims([]);
+                setSelectedMake(e.currentTarget.value);
+              }}
+            >
+              <option value="">Select Make</option>
+              {makes.map((make) => (
+                <option key={make.id}>{make.name}</option>
+              ))}
+            </select>
+          </div>
+
+          <div className="one-fourth" style={{ flex: 1 }}>
+            <label htmlFor="models">Models</label>
+            <select
+              name="models"
+              id="models"
+              value={selectedModel}
+              disabled={!Boolean(models.length)}
+              onChange={(e) => {
+                setTrims([]);
+                setSelectedModel(e.currentTarget.value);
+              }}
+            >
+              <option value="">Select Model</option>
+              {models.map((model) => (
+                <option key={model.id}>{model.name}</option>
+              ))}
+            </select>
+          </div>
+
+          <div
+            className="one-fourth"
+            style={{ flex: 0, alignSelf: "flex-end" }}
           >
-            <option value="">Select Year</option>
-            {years.map((year) => (
-              <option key={year}>{year}</option>
-            ))}
-          </select>
-        </div>
-
-        <div>
-          <label htmlFor="makes">Make</label>
-          <select
-            name="makes"
-            id="makes"
-            value={selectedMake}
-            disabled={!Boolean(makes.length)}
-            onChange={(e) => {
-              setSelectedModel("");
-              setTrims([]);
-              setSelectedMake(e.currentTarget.value);
-            }}
-          >
-            <option value="">Select Make</option>
-            {makes.map((make) => (
-              <option key={make.id}>{make.name}</option>
-            ))}
-          </select>
-        </div>
-
-        <div>
-          <label htmlFor="models">Models</label>
-          <select
-            name="models"
-            id="models"
-            value={selectedModel}
-            disabled={!Boolean(models.length)}
-            onChange={(e) => {
-              setTrims([]);
-              setSelectedModel(e.currentTarget.value);
-            }}
-          >
-            <option value="">Select Model</option>
-            {models.map((model) => (
-              <option key={model.id}>{model.name}</option>
-            ))}
-          </select>
-        </div>
-
-        <button disabled={formDisabled}>Find</button>
-      </form>
+            <button disabled={formDisabled}>Find</button>
+          </div>
+        </form>
+      </div>
 
       {loading && <p>Loading...</p>}
 
       {trims.length > 0 && (
-        <table
-          css={css`
-            border-collapse: collapse;
-            border: 1px solid #ccc;
-
-            th,
-            td {
-              border: 1px solid #ccc;
-              padding: 0.25rem 0.75rem;
-            }
-          `}
-        >
-          <thead>
-            <tr>
-              <th>Year</th>
-              <th>Make</th>
-              <th>Model</th>
-              <th>Trim</th>
-              <th>Description</th>
-              <th>MSRP</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {trims.map((trim) => (
-              <tr key={trim.id}>
-                <td>{trim.year}</td>
-                <td>{trim.make_model.make.name}</td>
-                <td>{trim.make_model.name}</td>
-                <td>{trim.name}</td>
-                <td>{trim.description}</td>
-                <td>{usDollar.format(trim.msrp)}</td>
-                <td>
-                  <button
-                    aria-label="View Details"
-                    onClick={() => window.open(`/vehicles/${trim.id}`)}
-                  >
-                    ℹ
-                  </button>{" "}
-                  <AddVehicleButton trimId={trim.id} />
-                </td>
+        <div className="contain-table">
+          <table className="striped-table">
+            <thead>
+              <tr>
+                <th>Year</th>
+                <th>Make</th>
+                <th>Model</th>
+                <th>Trim</th>
+                <th>Description</th>
+                <th>MSRP</th>
+                <th>Actions</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {trims.map((trim) => (
+                <tr key={trim.id}>
+                  <td>{trim.year}</td>
+                  <td>{trim.make_model.make.name}</td>
+                  <td>{trim.make_model.name}</td>
+                  <td>{trim.name}</td>
+                  <td>{trim.description}</td>
+                  <td>{usDollar.format(trim.msrp)}</td>
+                  <td className="text-right">
+                    <button
+                      className="muted-button"
+                      aria-label="View Details"
+                      onClick={() => window.open(`/vehicles/${trim.id}`)}
+                    >
+                      ℹ
+                    </button>{" "}
+                    <AddVehicleButton trimId={trim.id} />
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       )}
     </div>
   );

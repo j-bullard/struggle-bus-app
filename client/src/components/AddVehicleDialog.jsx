@@ -75,7 +75,7 @@ const AddVehicleDialog = ({ isOpen, trimId, onClose }) => {
 
       {!trim && !loading && !error && <p>No data</p>}
       {!loading && !error && trim ? (
-        <div>
+        <div className="container" style={{ width: "100%" }}>
           <header>
             <h1>
               {trim.year} {trim.make_model.make.name} {trim.make_model.name}
