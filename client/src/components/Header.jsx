@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 const Header = () => {
   return (
     <header>
-      <Link to="/">Fleet Manager</Link>
+      <Link to="/">Struggle Bus</Link>
 
       <nav>
         <Link to="/" role="button">
