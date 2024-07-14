@@ -5,26 +5,40 @@ const path = require("node:path");
 
 const PORT = 3001;
 const CAR_API_BASE_URL = "https://carapi.app/api";
+const DB_PATH = path.join(__dirname, "/data/fleet.json");
 
 const app = express();
 app.use(cors());
 app.use(express.json());
 
-app.get("/api/fleet", async (_, res) => {
-  const dbPath = path.join(__dirname, "/data/fleet.json");
-  const contents = fs.readFileSync(dbPath, "utf-8");
+app.get("/api/fleet", (_, res) => {
+  const contents = fs.readFileSync(DB_PATH, "utf-8");
   const fleet = JSON.parse(contents);
   res.status(200).json(fleet);
 });
 
-app.post("/api/fleet", async (req, res) => {
+app.post("/api/fleet", (req, res) => {
   const vehicle = req.body;
-  const dbPath = path.join(__dirname, "/data/fleet.json");
-  const contents = fs.readFileSync(dbPath, "utf-8");
+  const contents = fs.readFileSync(DB_PATH, "utf-8");
   const fleet = JSON.parse(contents);
   fleet.push(vehicle);
-  fs.writeFileSync(dbPath, JSON.stringify(fleet, null, 2));
+  fs.writeFileSync(DB_PATH, JSON.stringify(fleet, null, 2));
   res.status(201).json(vehicle);
+});
+
+app.delete("/api/fleet/:id", (req, res) => {
+  const { id } = req.params;
+
+  const contents = fs.readFileSync(DB_PATH, "utf-8");
+  const fleet = JSON.parse(contents);
+  const vehicleIndex = fleet.findIndex((v) => v.id === parseInt(id));
+  if (vehicleIndex === -1) {
+    res.status(404).json({ error: "Vehicle not found" });
+  } else {
+    fleet.splice(vehicleIndex, 1);
+    fs.writeFileSync(DB_PATH, JSON.stringify(fleet, null, 2));
+    res.status(204).end();
+  }
 });
 
 app.get("/api/makes", async (req, res) => {
