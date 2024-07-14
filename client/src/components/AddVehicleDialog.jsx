@@ -80,6 +80,9 @@ const AddVehicleDialog = ({ isOpen, trimId, onClose }) => {
             <h1>
               {trim.year} {trim.make_model.make.name} {trim.make_model.name}
             </h1>
+            <p>
+              <strong>{trim.description}</strong>
+            </p>
           </header>
 
           <form onSubmit={handleSubmit}>
