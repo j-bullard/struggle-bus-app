@@ -1,6 +1,7 @@
 const express = require("express");
 const cors = require("cors");
-const fleet = require("./data/fleet");
+const fs = require("node:fs");
+const path = require("node:path");
 
 const PORT = 3001;
 const CAR_API_BASE_URL = "https://carapi.app/api";
@@ -9,14 +10,21 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-app.get("/", (_, res) => {
+app.get("/api/fleet", async (_, res) => {
+  const dbPath = path.join(__dirname, "/data/fleet.json");
+  const contents = fs.readFileSync(dbPath, "utf-8");
+  const fleet = JSON.parse(contents);
   res.status(200).json(fleet);
 });
 
-app.get("/:vin", (req, res) => {
-  const vin = req.params.vin;
-  const vehicle = fleet.find((v) => v.vehicle_vin === vin);
-  res.status(200).json(vehicle);
+app.post("/api/fleet", async (req, res) => {
+  const vehicle = req.body;
+  const dbPath = path.join(__dirname, "/data/fleet.json");
+  const contents = fs.readFileSync(dbPath, "utf-8");
+  const fleet = JSON.parse(contents);
+  fleet.push(vehicle);
+  fs.writeFileSync(dbPath, JSON.stringify(fleet, null, 2));
+  res.status(201).json(vehicle);
 });
 
 app.get("/api/makes", async (req, res) => {
