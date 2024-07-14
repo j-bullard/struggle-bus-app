@@ -61,6 +61,9 @@ const AddVehicleDialog = ({ isOpen, trimId, onClose }) => {
       exterior_color: JSON.parse(entries.exterior_color),
     };
 
+    delete vehicle.make_model_trim_interior_colors;
+    delete vehicle.make_model_trim_exterior_colors;
+
     addToFleet(vehicle);
     onClose();
   };
@@ -80,15 +83,7 @@ const AddVehicleDialog = ({ isOpen, trimId, onClose }) => {
           </header>
 
           <form onSubmit={handleSubmit}>
-            <input
-              type="hidden"
-              name="trim"
-              value={JSON.stringify({
-                ...trim,
-                make_model_trim_interior_colors: null,
-                make_model_trim_exterior_colors: null,
-              })}
-            />
+            <input type="hidden" name="trim" value={JSON.stringify(trim)} />
 
             <div>
               <label>
