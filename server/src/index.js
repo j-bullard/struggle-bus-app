@@ -17,8 +17,28 @@ app.get("/api/fleet", (_, res) => {
   res.status(200).json(fleet);
 });
 
-app.post("/api/fleet", (req, res) => {
+app.get("/api/fleet/:vin", (req, res) => {
+  const { vin } = req.params;
+
+  const contents = fs.readFileSync(DB_PATH, "utf-8");
+  const fleet = JSON.parse(contents);
+  const vehicle = fleet.find((v) => v.vin === vin);
+  if (!vehicle) {
+    res.status(404).json({ error: "Vehicle not found" });
+  } else {
+    res.status(200).json(vehicle);
+  }
+});
+
+app.post("/api/fleet", async (req, res) => {
   const vehicle = req.body;
+  const q = `${vehicle.year} ${vehicle.make_model.make.name} ${vehicle.make_model.name} ${vehicle.name} with ${vehicle.exterior_color.name} exterior color.`;
+
+  const response = await fetch(
+    `https://serpapi.com/search.json?engine=google_images&q=${q}&location=United+States&api_key=ac5aca347751f30a1c27e66b1c5a7556e6f7222f96eb4a9cdc39a8f999a503f8`,
+  );
+  const json = await response.json();
+  vehicle.image = json.images_results[0].original;
   const contents = fs.readFileSync(DB_PATH, "utf-8");
   const fleet = JSON.parse(contents);
   fleet.push(vehicle);
@@ -26,12 +46,12 @@ app.post("/api/fleet", (req, res) => {
   res.status(201).json(vehicle);
 });
 
-app.delete("/api/fleet/:id", (req, res) => {
-  const { id } = req.params;
+app.delete("/api/fleet/:vin", (req, res) => {
+  const { vin } = req.params;
 
   const contents = fs.readFileSync(DB_PATH, "utf-8");
   const fleet = JSON.parse(contents);
-  const vehicleIndex = fleet.findIndex((v) => v.id === parseInt(id));
+  const vehicleIndex = fleet.findIndex((v) => v.vin === vin);
   if (vehicleIndex === -1) {
     res.status(404).json({ error: "Vehicle not found" });
   } else {
