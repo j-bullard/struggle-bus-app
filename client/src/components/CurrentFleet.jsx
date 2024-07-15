@@ -99,6 +99,7 @@ const CurrentFleet = () => {
                   <Td>
                     <ButtonGroup gap="2">
                       <IconButton
+                        className="vicDeets"
                         size="sm"
                         variant="outline"
                         onClick={() => navigate(`/vehicles/${vehicle.vin}`)}
