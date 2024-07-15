@@ -108,7 +108,7 @@ const BrowseVehicles = () => {
         <Card variant="outline">
           <CardBody>
             <form onSubmit={handleSubmit}>
-              <Stack direction={["column", "row"]}>
+              <Stack direction={{ base: "column", lg: "row" }}>
                 <FormControl>
                   <FormLabel>Year</FormLabel>
                   <Select
