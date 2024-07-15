@@ -100,7 +100,12 @@ const AddVehicleDrawer = ({ trimId, open, onSuccess, onCancel }) => {
 
                 <FormControl>
                   <FormLabel>Year</FormLabel>
-                  <Input type="text" readOnly defaultValue={trim.year} />
+                  <Input
+                    type="text"
+                    readOnly
+                    defaultValue={trim.year}
+                    required
+                  />
                 </FormControl>
 
                 <FormControl>
@@ -109,6 +114,7 @@ const AddVehicleDrawer = ({ trimId, open, onSuccess, onCancel }) => {
                     type="text"
                     readOnly
                     defaultValue={trim.make_model.make.name}
+                    required
                   />
                 </FormControl>
 
@@ -118,32 +124,38 @@ const AddVehicleDrawer = ({ trimId, open, onSuccess, onCancel }) => {
                     type="text"
                     readOnly
                     defaultValue={trim.make_model.name}
+                    required
                   />
                 </FormControl>
 
                 <FormControl>
                   <FormLabel>VIN</FormLabel>
-                  <Input type="text" name="vin" autoComplete="off" />
+                  <Input type="text" name="vin" autoComplete="off" required />
                 </FormControl>
 
                 <FormControl>
                   <FormLabel>License Plate</FormLabel>
-                  <Input type="text" name="license_plate" autoComplete="off" />
+                  <Input
+                    type="text"
+                    name="license_plate"
+                    autoComplete="off"
+                    required
+                  />
                 </FormControl>
 
                 <FormControl>
                   <FormLabel>Purchase Date</FormLabel>
-                  <Input type="date" name="purchase_date" />
+                  <Input type="date" name="purchase_date" required />
                 </FormControl>
 
                 <FormControl>
                   <FormLabel>Purchase Price</FormLabel>
-                  <Input type="number" name="purchase_price" />
+                  <Input type="number" name="purchase_price" required />
                 </FormControl>
 
                 <FormControl>
                   <FormLabel>Purchase Mileage</FormLabel>
-                  <Input type="number" name="purchase_mileage" />
+                  <Input type="number" name="purchase_mileage" required />
                 </FormControl>
 
                 <FormControl>
@@ -152,6 +164,7 @@ const AddVehicleDrawer = ({ trimId, open, onSuccess, onCancel }) => {
                     defaultValue={JSON.stringify(
                       trim.make_model_trim_interior_colors[0],
                     )}
+                    required
                   >
                     <Stack direction="column">
                       {trim.make_model_trim_interior_colors.map((color) => (
@@ -173,6 +186,7 @@ const AddVehicleDrawer = ({ trimId, open, onSuccess, onCancel }) => {
                     defaultValue={JSON.stringify(
                       trim.make_model_trim_exterior_colors[0],
                     )}
+                    required
                   >
                     <Stack direction="column">
                       {trim.make_model_trim_exterior_colors.map((color) => (
