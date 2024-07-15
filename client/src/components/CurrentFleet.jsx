@@ -1,6 +1,5 @@
 import { useFleetContext } from "@/contexts/FleetContext";
 import {
-  Button,
   ButtonGroup,
   Table,
   TableContainer,
@@ -13,9 +12,9 @@ import {
   Tooltip,
   Heading,
   Tag,
-  Container,
   Stack,
   HStack,
+  IconButton,
 } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
@@ -99,20 +98,20 @@ const CurrentFleet = () => {
                   </Td>
                   <Td>
                     <ButtonGroup gap="2">
-                      <Button
+                      <IconButton
                         size="sm"
                         variant="outline"
                         onClick={() => navigate(`/vehicles/${vehicle.id}`)}
                       >
                         <RxInfoCircled fontSize={18} />
-                      </Button>
-                      <Button
+                      </IconButton>
+                      <IconButton
                         size="sm"
                         colorScheme="red"
                         onClick={() => handleRemove(vehicle.id)}
                       >
                         <RxTrash fontSize={18} />
-                      </Button>
+                      </IconButton>
                     </ButtonGroup>
                   </Td>
                 </Tr>
