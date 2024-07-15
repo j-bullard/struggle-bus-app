@@ -1,6 +1,26 @@
 import { usDollar } from "@/utils/currency";
 import { useEffect, useState } from "react";
 import AddVehicleButton from "@/components/AddVehicleButton";
+import {
+  Box,
+  Button,
+  ButtonGroup,
+  Card,
+  CardBody,
+  FormControl,
+  FormLabel,
+  Heading,
+  Select,
+  Stack,
+  Table,
+  TableContainer,
+  Tbody,
+  Td,
+  Th,
+  Thead,
+  Tr,
+} from "@chakra-ui/react";
+import { RxInfoCircled } from "react-icons/rx";
 
 const BrowseVehicles = () => {
   const [selectedYear, setSelectedYear] = useState(2020);
@@ -80,117 +100,131 @@ const BrowseVehicles = () => {
 
   return (
     <div>
-      <h4>Approved Vehicle List</h4>
+      <Box sx={{ paddingTop: "2rem", paddingBottom: "2rem" }}>
+        <Heading as="h2" marginBottom={8}>
+          Approved Vehicle List
+        </Heading>
 
-      <form
-        onSubmit={handleSubmit}
-        className="flex-row"
-        style={{ gap: "20px" }}
-      >
-        <div className="one-fourth" style={{ flex: 1 }}>
-          <label htmlFor="year">Year</label>
-          <select
-            name="year"
-            id="year"
-            value={selectedYear}
-            onChange={(e) => {
-              setSelectedMake("");
-              setSelectedModel("");
-              setTrims([]);
-              setSelectedYear(e.currentTarget.value);
-            }}
-          >
-            <option value="">Select Year</option>
-            {years.map((year) => (
-              <option key={year}>{year}</option>
-            ))}
-          </select>
-        </div>
+        <Card variant="outline">
+          <CardBody>
+            <form onSubmit={handleSubmit}>
+              <Stack direction={["column", "row"]}>
+                <FormControl>
+                  <FormLabel>Year</FormLabel>
+                  <Select
+                    name="year"
+                    id="year"
+                    value={selectedYear}
+                    onChange={(e) => {
+                      setSelectedMake("");
+                      setSelectedModel("");
+                      setTrims([]);
+                      setSelectedYear(e.currentTarget.value);
+                    }}
+                  >
+                    <option value="">Select Year</option>
+                    {years.map((year) => (
+                      <option key={year}>{year}</option>
+                    ))}
+                  </Select>
+                </FormControl>
 
-        <div className="one-fourth" style={{ flex: 1 }}>
-          <label htmlFor="makes">Make</label>
-          <select
-            name="makes"
-            id="makes"
-            value={selectedMake}
-            disabled={!Boolean(makes.length)}
-            onChange={(e) => {
-              setSelectedModel("");
-              setTrims([]);
-              setSelectedMake(e.currentTarget.value);
-            }}
-          >
-            <option value="">Select Make</option>
-            {makes.map((make) => (
-              <option key={make.id}>{make.name}</option>
-            ))}
-          </select>
-        </div>
+                <FormControl>
+                  <FormLabel>Make</FormLabel>
+                  <Select
+                    name="makes"
+                    id="makes"
+                    value={selectedMake}
+                    disabled={!Boolean(makes.length)}
+                    onChange={(e) => {
+                      setSelectedModel("");
+                      setTrims([]);
+                      setSelectedMake(e.currentTarget.value);
+                    }}
+                  >
+                    <option value="">Select Make</option>
+                    {makes.map((make) => (
+                      <option key={make.id}>{make.name}</option>
+                    ))}
+                  </Select>
+                </FormControl>
 
-        <div className="one-fourth" style={{ flex: 1 }}>
-          <label htmlFor="models">Models</label>
-          <select
-            name="models"
-            id="models"
-            value={selectedModel}
-            disabled={!Boolean(models.length)}
-            onChange={(e) => {
-              setTrims([]);
-              setSelectedModel(e.currentTarget.value);
-            }}
-          >
-            <option value="">Select Model</option>
-            {models.map((model) => (
-              <option key={model.id}>{model.name}</option>
-            ))}
-          </select>
-        </div>
+                <FormControl>
+                  <FormLabel>Models</FormLabel>
+                  <Select
+                    name="models"
+                    id="models"
+                    value={selectedModel}
+                    disabled={!Boolean(models.length)}
+                    onChange={(e) => {
+                      setTrims([]);
+                      setSelectedModel(e.currentTarget.value);
+                    }}
+                  >
+                    <option value="">Select Model</option>
+                    {models.map((model) => (
+                      <option key={model.id}>{model.name}</option>
+                    ))}
+                  </Select>
+                </FormControl>
 
-        <div className="one-fourth" style={{ flex: 0, alignSelf: "flex-end" }}>
-          <button disabled={formDisabled}>Find</button>
-        </div>
-      </form>
+                <div style={{ alignSelf: "flex-end" }}>
+                  <Button
+                    type="submit"
+                    colorScheme="blue"
+                    disabled={formDisabled}
+                  >
+                    Find
+                  </Button>
+                </div>
+              </Stack>
+            </form>
+          </CardBody>
+        </Card>
+      </Box>
 
       {loading && <p>Loading...</p>}
 
       {trims.length > 0 && (
-        <div className="contain-table">
-          <table className="striped-table">
-            <thead>
-              <tr>
-                <th>Year</th>
-                <th>Make</th>
-                <th>Model</th>
-                <th>Trim</th>
-                <th>Description</th>
-                <th>MSRP</th>
-                <th>Actions</th>
-              </tr>
-            </thead>
-            <tbody>
+        <TableContainer>
+          <Table size="sm">
+            <Thead>
+              <Tr>
+                <Th>Year</Th>
+                <Th>Make</Th>
+                <Th>Model</Th>
+                <Th>Trim</Th>
+                <Th>Description</Th>
+                <Th>MSRP</Th>
+                <Th>Actions</Th>
+              </Tr>
+            </Thead>
+            <Tbody>
               {trims.map((trim) => (
-                <tr key={trim.id}>
-                  <td>{trim.year}</td>
-                  <td>{trim.make_model.make.name}</td>
-                  <td>{trim.make_model.name}</td>
-                  <td>{trim.name}</td>
-                  <td>{trim.description}</td>
-                  <td>{usDollar.format(trim.msrp)}</td>
-                  <td>
-                    <button
-                      className="muted-button"
-                      aria-label="View Details"
-                      onClick={() => window.open(`/vehicles/${trim.id}`)}
-                    >
-                      ℹ
-                    </button>{" "}
-                    <AddVehicleButton trimId={trim.id} />
-                  </td>
-                </tr>
+                <Tr key={trim.id}>
+                  <Td>{trim.year}</Td>
+                  <Td>{trim.make_model.make.name}</Td>
+                  <Td>{trim.make_model.name}</Td>
+                  <Td>{trim.name}</Td>
+                  <Td>{trim.description}</Td>
+                  <Td>{usDollar.format(trim.msrp)}</Td>
+                  <Td>
+                    <ButtonGroup>
+                      <Button
+                        variant="ghost"
+                        onClick={() => window.open(`/vehicles/${trim.id}`)}
+                        size="sm"
+                      >
+                        <RxInfoCircled fontSize={18} />
+                      </Button>
+                      <AddVehicleButton trimId={trim.id} />
+                    </ButtonGroup>
+                  </Td>
+                </Tr>
               ))}
-            </tbody>
-          </table>
-        </div>
+            </Tbody>
+          </Table>
+        </TableContainer>
       )}
     </div>
   );

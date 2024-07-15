@@ -14,6 +14,8 @@ import {
   Heading,
   Tag,
   Container,
+  Stack,
+  HStack,
 } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
@@ -49,15 +51,14 @@ const CurrentFleet = () => {
         <p>There are no vehciels currently in the fleet.</p>
       ) : (
         <TableContainer>
-          <Table variant="striped">
+          <Table size="sm">
             <Thead>
               <Tr>
                 <Th>Year</Th>
                 <Th>Make</Th>
                 <Th>Model</Th>
                 <Th>Trim</Th>
-                <Th>Exterior Color</Th>
-                <Th>Interior Color</Th>
+                <Th>Colors</Th>
                 <Th>Actions</Th>
               </Tr>
             </Thead>
@@ -69,26 +70,34 @@ const CurrentFleet = () => {
                   <Td>{vehicle.make_model.name}</Td>
                   <Td>{vehicle.name}</Td>
                   <Td>
-                    <Tooltip label={vehicle.exterior_color.name}>
-                      <Tag
-                        sx={{
-                          backgroundColor: `rgb(${vehicle.exterior_color.rgb})`,
-                          border: "1px solid #ccc",
-                        }}
-                      />
-                    </Tooltip>
+                    <Stack>
+                      <Tooltip label={vehicle.exterior_color.name}>
+                        <HStack>
+                          <Tag
+                            sx={{
+                              backgroundColor: `rgb(${vehicle.exterior_color.rgb})`,
+                              border: "1px solid #ccc",
+                              userSelect: "none",
+                            }}
+                          />
+                          <span>Exterior</span>
+                        </HStack>
+                      </Tooltip>
+
+                      <Tooltip label={vehicle.interior_color.name}>
+                        <HStack>
+                          <Tag
+                            sx={{
+                              backgroundColor: `rgb(${vehicle.interior_color.rgb})`,
+                              border: "1px solid #ccc",
+                            }}
+                          />
+                          <span>Interior</span>
+                        </HStack>
+                      </Tooltip>
+                    </Stack>
                   </Td>
                   <Td>
-                    <Tooltip label={vehicle.interior_color.name}>
-                      <Tag
-                        sx={{
-                          backgroundColor: `rgb(${vehicle.interior_color.rgb})`,
-                          border: "1px solid #ccc",
-                        }}
-                      />
-                    </Tooltip>
-                  </Td>
-                  <Td className="text-right">
                     <ButtonGroup gap="2">
                       <Button
                         size="sm"

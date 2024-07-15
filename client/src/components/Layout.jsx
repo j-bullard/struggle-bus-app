@@ -1,6 +1,6 @@
 import { Box, Button, Container, Stack } from "@chakra-ui/react";
 import { NavLink, Outlet } from "react-router-dom";
-import { RxDashboard, RxMagnifyingGlass } from "react-icons/rx";
+import { RxDashboard, RxMagnifyingGlass, RxRocket } from "react-icons/rx";
 
 const Layout = () => {
   return (
@@ -28,7 +28,7 @@ const Layout = () => {
             justifyContent: "start",
           }}
         >
-          Current Fleet
+          Fleet
         </Button>
         <Button
           as={NavLink}
@@ -41,7 +41,20 @@ const Layout = () => {
             justifyContent: "start",
           }}
         >
-          Approved Vehicles
+          AVL
+        </Button>
+        <Button
+          as={NavLink}
+          to="/news"
+          variant="ghost"
+          leftIcon={<RxRocket fontSize={20} />}
+          sx={{
+            display: "inline-flex",
+            alignItems: "center",
+            justifyContent: "start",
+          }}
+        >
+          News
         </Button>
       </Stack>
 
