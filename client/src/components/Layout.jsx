@@ -1,12 +1,56 @@
-import Header from "@/components/Header";
-import { Outlet } from "react-router-dom";
+import { Box, Button, Container, Stack } from "@chakra-ui/react";
+import { NavLink, Outlet } from "react-router-dom";
+import { RxDashboard, RxMagnifyingGlass } from "react-icons/rx";
 
 const Layout = () => {
   return (
-    <div className="container">
-      <Header />
-      <Outlet />
-    </div>
+    <Box>
+      <Stack
+        sx={{
+          width: "16rem",
+          position: "fixed",
+          top: 0,
+          bottom: 0,
+          left: 0,
+          borderWidth: 1,
+          borderColor: "gray.200",
+          padding: "1.75rem 1.5rem",
+        }}
+      >
+        <Button
+          as={NavLink}
+          to="/"
+          variant="ghost"
+          leftIcon={<RxDashboard fontSize={20} />}
+          sx={{
+            display: "inline-flex",
+            alignItems: "center",
+            justifyContent: "start",
+          }}
+        >
+          Current Fleet
+        </Button>
+        <Button
+          as={NavLink}
+          to="/browse"
+          variant="ghost"
+          leftIcon={<RxMagnifyingGlass fontSize={20} />}
+          sx={{
+            display: "inline-flex",
+            alignItems: "center",
+            justifyContent: "start",
+          }}
+        >
+          Approved Vehicles
+        </Button>
+      </Stack>
+
+      <Box sx={{ pl: "16rem" }}>
+        <Container maxW="8xl">
+          <Outlet />
+        </Container>
+      </Box>
+    </Box>
   );
 };
 

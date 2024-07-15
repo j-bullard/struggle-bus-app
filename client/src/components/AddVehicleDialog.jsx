@@ -1,6 +1,7 @@
 import Dialog from "@/components/ui/dialog";
 import { useFleetContext } from "@/contexts/FleetContext";
 import { useEffect, useState } from "react";
+import Swal from "sweetalert2";
 
 const AddVehicleDialog = ({ isOpen, trimId, onClose }) => {
   const { addToFleet } = useFleetContext();
@@ -43,7 +44,7 @@ const AddVehicleDialog = ({ isOpen, trimId, onClose }) => {
     });
   }, [trimId, isOpen]);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     const formData = new FormData(e.currentTarget);
@@ -64,8 +65,18 @@ const AddVehicleDialog = ({ isOpen, trimId, onClose }) => {
     delete vehicle.make_model_trim_interior_colors;
     delete vehicle.make_model_trim_exterior_colors;
 
-    addToFleet(vehicle);
-    onClose();
+    addToFleet(vehicle).then(() => {
+      Swal.fire({
+        title: "Vehicle added",
+        icon: "success",
+        showConfirmButton: false,
+        text: "Vehicle has been added to your fleet",
+        timer: 1500,
+        timerProgressBar: true,
+      });
+
+      onClose();
+    });
   };
 
   return (

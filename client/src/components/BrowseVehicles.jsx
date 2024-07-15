@@ -1,8 +1,5 @@
 import { usDollar } from "@/utils/currency";
 import { useEffect, useState } from "react";
-
-/** @jsxImportSource @emotion/react */
-import { css } from "@emotion/react";
 import AddVehicleButton from "@/components/AddVehicleButton";
 
 const BrowseVehicles = () => {
@@ -85,79 +82,74 @@ const BrowseVehicles = () => {
     <div>
       <h4>Approved Vehicle List</h4>
 
-      <div className="container">
-        <form
-          onSubmit={handleSubmit}
-          className="flex-row"
-          style={{ gap: "20px" }}
-        >
-          <div className="one-fourth" style={{ flex: 1 }}>
-            <label htmlFor="year">Year</label>
-            <select
-              name="year"
-              id="year"
-              value={selectedYear}
-              onChange={(e) => {
-                setSelectedMake("");
-                setSelectedModel("");
-                setTrims([]);
-                setSelectedYear(e.currentTarget.value);
-              }}
-            >
-              <option value="">Select Year</option>
-              {years.map((year) => (
-                <option key={year}>{year}</option>
-              ))}
-            </select>
-          </div>
-
-          <div className="one-fourth" style={{ flex: 1 }}>
-            <label htmlFor="makes">Make</label>
-            <select
-              name="makes"
-              id="makes"
-              value={selectedMake}
-              disabled={!Boolean(makes.length)}
-              onChange={(e) => {
-                setSelectedModel("");
-                setTrims([]);
-                setSelectedMake(e.currentTarget.value);
-              }}
-            >
-              <option value="">Select Make</option>
-              {makes.map((make) => (
-                <option key={make.id}>{make.name}</option>
-              ))}
-            </select>
-          </div>
-
-          <div className="one-fourth" style={{ flex: 1 }}>
-            <label htmlFor="models">Models</label>
-            <select
-              name="models"
-              id="models"
-              value={selectedModel}
-              disabled={!Boolean(models.length)}
-              onChange={(e) => {
-                setTrims([]);
-                setSelectedModel(e.currentTarget.value);
-              }}
-            >
-              <option value="">Select Model</option>
-              {models.map((model) => (
-                <option key={model.id}>{model.name}</option>
-              ))}
-            </select>
-          </div>
-
-          <div
-            className="one-fourth"
-            style={{ flex: 0, alignSelf: "flex-end" }}
+      <form
+        onSubmit={handleSubmit}
+        className="flex-row"
+        style={{ gap: "20px" }}
+      >
+        <div className="one-fourth" style={{ flex: 1 }}>
+          <label htmlFor="year">Year</label>
+          <select
+            name="year"
+            id="year"
+            value={selectedYear}
+            onChange={(e) => {
+              setSelectedMake("");
+              setSelectedModel("");
+              setTrims([]);
+              setSelectedYear(e.currentTarget.value);
+            }}
           >
-            <button disabled={formDisabled}>Find</button>
-          </div>
-        </form>
-      </div>
+            <option value="">Select Year</option>
+            {years.map((year) => (
+              <option key={year}>{year}</option>
+            ))}
+          </select>
+        </div>
+
+        <div className="one-fourth" style={{ flex: 1 }}>
+          <label htmlFor="makes">Make</label>
+          <select
+            name="makes"
+            id="makes"
+            value={selectedMake}
+            disabled={!Boolean(makes.length)}
+            onChange={(e) => {
+              setSelectedModel("");
+              setTrims([]);
+              setSelectedMake(e.currentTarget.value);
+            }}
+          >
+            <option value="">Select Make</option>
+            {makes.map((make) => (
+              <option key={make.id}>{make.name}</option>
+            ))}
+          </select>
+        </div>
+
+        <div className="one-fourth" style={{ flex: 1 }}>
+          <label htmlFor="models">Models</label>
+          <select
+            name="models"
+            id="models"
+            value={selectedModel}
+            disabled={!Boolean(models.length)}
+            onChange={(e) => {
+              setTrims([]);
+              setSelectedModel(e.currentTarget.value);
+            }}
+          >
+            <option value="">Select Model</option>
+            {models.map((model) => (
+              <option key={model.id}>{model.name}</option>
+            ))}
+          </select>
+        </div>
+
+        <div className="one-fourth" style={{ flex: 0, alignSelf: "flex-end" }}>
+          <button disabled={formDisabled}>Find</button>
+        </div>
+      </form>
 
       {loading && <p>Loading...</p>}
 
@@ -184,7 +176,7 @@ const BrowseVehicles = () => {
                   <td>{trim.name}</td>
                   <td>{trim.description}</td>
                   <td>{usDollar.format(trim.msrp)}</td>
-                  <td className="text-right">
+                  <td>
                     <button
                       className="muted-button"
                       aria-label="View Details"
