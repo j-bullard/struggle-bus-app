@@ -1,5 +1,5 @@
 import AddVehicleDrawer from "@/components/AddVehicleDrawer";
-import { Button } from "@chakra-ui/react";
+import { IconButton } from "@chakra-ui/react";
 import { useState } from "react";
 import { RxPlus } from "react-icons/rx";
 import Swal from "sweetalert2";
@@ -9,9 +9,9 @@ const AddVehicleButton = ({ trimId }) => {
 
   return (
     <>
-      <Button colorScheme="blue" onClick={() => setOpen(true)} size="sm">
+      <IconButton colorScheme="blue" onClick={() => setOpen(true)} size="sm">
         <RxPlus fontSize={18} />
-      </Button>
+      </IconButton>
 
       <AddVehicleDrawer
         open={open}

@@ -10,6 +10,7 @@ import {
   FormControl,
   FormLabel,
   Heading,
+  IconButton,
   Select,
   Stack,
   Table,
@@ -210,13 +211,13 @@ const BrowseVehicles = () => {
                   <Td>{usDollar.format(trim.msrp)}</Td>
                   <Td>
                     <ButtonGroup>
-                      <Button
+                      <IconButton
                         variant="ghost"
                         onClick={() => window.open(`/vehicles/${trim.id}`)}
                         size="sm"
                       >
                         <RxInfoCircled fontSize={18} />
-                      </Button>
+                      </IconButton>
                       <AddVehicleButton trimId={trim.id} />
                     </ButtonGroup>
                   </Td>
