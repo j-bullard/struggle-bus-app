@@ -1,4 +1,4 @@
-import AddVehicleDrawer from "@/components/AddVehicleDrawer";
+import AddVehicleDrawer from "@/components/ApprovedVehicleList/AddVehicleDrawer";
 import { IconButton } from "@chakra-ui/react";
 import { useState } from "react";
 import { RxPlus } from "react-icons/rx";

@@ -1,6 +1,6 @@
 import { usDollar } from "@/utils/currency";
 import { useEffect, useState } from "react";
-import AddVehicleButton from "@/components/AddVehicleButton";
+import AddVehicleButton from "@/components/ApprovedVehicleList/AddVehicleButton";
 import {
   Box,
   Button,
@@ -10,7 +10,6 @@ import {
   FormControl,
   FormLabel,
   Heading,
-  IconButton,
   Select,
   Stack,
   Table,
@@ -21,9 +20,9 @@ import {
   Thead,
   Tr,
 } from "@chakra-ui/react";
-import { RxInfoCircled } from "react-icons/rx";
+import InfoButton from "@/components/ApprovedVehicleList/InfoButton";
 
-const BrowseVehicles = () => {
+const ApprovedVehicleList = () => {
   const [selectedYear, setSelectedYear] = useState(2020);
   const [selectedMake, setSelectedMake] = useState();
   const [selectedModel, setSelectedModel] = useState();
@@ -211,13 +210,7 @@ const BrowseVehicles = () => {
                   <Td>{usDollar.format(trim.msrp)}</Td>
                   <Td>
                     <ButtonGroup>
-                      <IconButton
-                        variant="ghost"
-                        onClick={() => window.open(`/vehicles/${trim.id}`)}
-                        size="sm"
-                      >
-                        <RxInfoCircled fontSize={18} />
-                      </IconButton>
+                      <InfoButton trimId={trim.id} />
                       <AddVehicleButton trimId={trim.id} />
                     </ButtonGroup>
                   </Td>
@@ -231,5 +224,5 @@ const BrowseVehicles = () => {
   );
 };
 
-export { BrowseVehicles };
-export default BrowseVehicles;
+export { ApprovedVehicleList };
+export default ApprovedVehicleList;
