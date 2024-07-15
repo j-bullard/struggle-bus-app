@@ -47,7 +47,7 @@ const CurrentFleet = () => {
       </Box>
 
       {fleet.length === 0 ? (
-        <p>There are no vehciels currently in the fleet.</p>
+        <p>There are no vehicles currently in the fleet.</p>
       ) : (
         <TableContainer>
           <Table size="sm">
@@ -101,7 +101,7 @@ const CurrentFleet = () => {
                       <IconButton
                         size="sm"
                         variant="outline"
-                        onClick={() => navigate(`/vehicles/${vehicle.id}`)}
+                        onClick={() => navigate(`/vehicles/${vehicle.vin}`)}
                       >
                         <RxInfoCircled fontSize={18} />
                       </IconButton>
