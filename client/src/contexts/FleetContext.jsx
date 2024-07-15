@@ -58,11 +58,11 @@ export const FleetProvider = ({ children }) => {
     return { result, error };
   };
 
-  const removeFromFleet = async (vehicleId) => {
+  const removeFromFleet = async (vin) => {
     let result, error;
 
     try {
-      const response = await fetch(`/api/fleet/${vehicleId}`, {
+      const response = await fetch(`/api/fleet/${vin}`, {
         method: "DELETE",
       });
 
@@ -70,8 +70,8 @@ export const FleetProvider = ({ children }) => {
         throw new Error("Failed to remove vehicle from fleet");
       }
 
-      setFleet((prevFleet) => prevFleet.filter((v) => v.id !== vehicleId));
-      result = vehicleId;
+      setFleet((prevFleet) => prevFleet.filter((v) => v.vin !== vin));
+      result = vin;
     } catch (err) {
       error = err instanceof Error ? err.message : "An error occurred";
     }

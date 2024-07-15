@@ -108,7 +108,7 @@ const CurrentFleet = () => {
                       <IconButton
                         size="sm"
                         colorScheme="red"
-                        onClick={() => handleRemove(vehicle.id)}
+                        onClick={() => handleRemove(vehicle.vin)}
                       >
                         <RxTrash fontSize={18} />
                       </IconButton>
