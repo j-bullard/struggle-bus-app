@@ -10,6 +10,7 @@ import {
   FormControl,
   FormLabel,
   Heading,
+  Image,
   Select,
   Stack,
   Table,
@@ -105,9 +106,11 @@ const AVLRoute = () => {
   return (
     <>
       <Box sx={{ paddingTop: "2rem", paddingBottom: "2rem" }}>
-        <Heading as="h2" marginBottom={8}>
-          Approved Vehicle List
-        </Heading>
+        <Stack direction="row" alignItems="center" mb={8}>
+          <Image src="/images/avl.webp" alt="AVL" boxSize="100px" />
+
+          <Heading as="h2">Approved Vehicle List</Heading>
+        </Stack>
 
         <Card variant="outline">
           <CardBody>
