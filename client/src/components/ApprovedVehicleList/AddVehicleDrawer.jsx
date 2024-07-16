@@ -22,6 +22,7 @@ const AddVehicleDrawer = ({ trimId, open, onSuccess, onCancel }) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [trim, setTrim] = useState(null);
+  const [isAdding, setIsAdding] = useState(false);
 
   useEffect(() => {
     if (!open) {
@@ -61,6 +62,8 @@ const AddVehicleDrawer = ({ trimId, open, onSuccess, onCancel }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    setIsAdding(true);
+
     const formData = new FormData(e.currentTarget);
     const entries = Object.fromEntries(formData);
 
@@ -79,7 +82,10 @@ const AddVehicleDrawer = ({ trimId, open, onSuccess, onCancel }) => {
     delete vehicle.make_model_trim_interior_colors;
     delete vehicle.make_model_trim_exterior_colors;
 
-    addToFleet(vehicle).then(() => onSuccess());
+    addToFleet(vehicle).then(() => {
+      onSuccess();
+      setIsAdding(false);
+    });
   };
 
   return (
@@ -210,10 +216,15 @@ const AddVehicleDrawer = ({ trimId, open, onSuccess, onCancel }) => {
           </DrawerBody>
 
           <DrawerFooter>
-            <Button variant="outline" mr={3} onClick={onCancel}>
+            <Button
+              variant="outline"
+              mr={3}
+              onClick={onCancel}
+              disabled={isAdding}
+            >
               Cancel
             </Button>
-            <Button colorScheme="blue" type="submit">
+            <Button colorScheme="blue" type="submit" isLoading={isAdding}>
               Save
             </Button>
           </DrawerFooter>
