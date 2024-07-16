@@ -25,7 +25,9 @@ describe("<HomeRoute />", () => {
     setup(["/"]);
 
     await waitFor(() => {
-      expect(screen.getByText("No vehicles in the fleet")).toBeInTheDocument();
+      expect(
+        screen.getByText("There are no vehicles currently in the fleet."),
+      ).toBeInTheDocument();
     });
   });
 
