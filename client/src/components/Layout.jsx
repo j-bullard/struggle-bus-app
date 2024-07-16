@@ -6,6 +6,7 @@ import {
   Image,
   Heading,
   Divider,
+  Text,
 } from "@chakra-ui/react";
 import { NavLink, Outlet } from "react-router-dom";
 import { RxDashboard, RxMagnifyingGlass, RxRocket } from "react-icons/rx";
@@ -32,7 +33,16 @@ const Layout = () => {
             src="/images/strugg-bus-logo.jpg"
             alt="Struggle Bus"
           />
-          <Heading>Struggle</Heading>
+          <Heading
+            fontStyle="italic"
+            border="2px solid black"
+            background="black"
+            color="white"
+            p={2}
+          >
+            Struggle
+          </Heading>
+          <Text fontStyle="italic">is real</Text>
         </Stack>
 
         <Divider />
