@@ -34,6 +34,10 @@ const AVLRoute = () => {
   const [trims, setTrims] = useState([]);
 
   useEffect(() => {
+    document.title = "AVL | Struggle Bus";
+  }, []);
+
+  useEffect(() => {
     setSelectedMake("");
     setTrims([]);
 
@@ -99,7 +103,7 @@ const AVLRoute = () => {
   };
 
   return (
-    <div>
+    <>
       <Box sx={{ paddingTop: "2rem", paddingBottom: "2rem" }}>
         <Heading as="h2" marginBottom={8}>
           Approved Vehicle List
@@ -173,6 +177,7 @@ const AVLRoute = () => {
                     type="submit"
                     colorScheme="blue"
                     disabled={formDisabled}
+                    isLoading={loading}
                   >
                     Find
                   </Button>
@@ -220,7 +225,7 @@ const AVLRoute = () => {
           </Table>
         </TableContainer>
       )}
-    </div>
+    </>
   );
 };
 
