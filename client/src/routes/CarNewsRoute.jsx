@@ -1,5 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { List, UnorderedList, ListItem, Heading, Box } from "@chakra-ui/react";
+import {
+  List,
+  UnorderedList,
+  ListItem,
+  Heading,
+  Box,
+  Stack,
+} from "@chakra-ui/react";
 
 const cleanCarNews = (articles) => {
   const unwantedKeyWords = [
@@ -20,6 +27,11 @@ const cleanCarNews = (articles) => {
     "dies",
     "stolen",
     "bad words",
+    "401",
+    "police",
+    "firefighter",
+    "boat",
+    "yacht",
     // "[Removed]",
   ];
 
@@ -45,6 +57,10 @@ const CarNewsRoute = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    document.title = "News | Struggle Bus";
+  }, []);
+
+  useEffect(() => {
     const fetchNews = async () => {
       try {
         const res = await fetch(
@@ -56,7 +72,6 @@ const CarNewsRoute = () => {
         const data = await res.json();
         const cleanedData = cleanCarNews(data.articles);
         setNews(cleanedData);
-        console.log(cleanedData);
       } catch (error) {
         console.error("error", error);
       } finally {
@@ -72,20 +87,30 @@ const CarNewsRoute = () => {
   }
 
   return (
-    <Box>
-      <Heading>Car Related News</Heading>
-      <List>
-        <UnorderedList className="newsList">
-          {news.map((article, index) => (
-            <ListItem className="newsArticle" key={index}>
-              <a href={article.url} target="_blank" rel="noopener noreferrer">
-                {article.title}
-              </a>
-            </ListItem>
-          ))}
-        </UnorderedList>
-      </List>
-    </Box>
+    <>
+      <Box>
+        <Stack mb={10} mt={15}>
+          <Heading>Car Related News</Heading>
+        </Stack>
+        <Stack mb={5}>
+          <List>
+            <UnorderedList className="newsList">
+              {news.map((article, index) => (
+                <ListItem className="newsArticle" key={index}>
+                  <a
+                    href={article.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {article.title}
+                  </a>
+                </ListItem>
+              ))}
+            </UnorderedList>
+          </List>
+        </Stack>
+      </Box>
+    </>
   );
 };
 
