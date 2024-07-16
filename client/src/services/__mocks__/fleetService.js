@@ -1,8 +1,11 @@
-// import { vehicleData } from "./mockData";
+import { vehicleData } from "./mockData";
 
-// const mockApiService = {
-//   async getCars() {
-//     return vehicleData;
-//   },
+// export const fetchFleet = async () => {
+//   return { result: vehicleData, error: undefined };
 // };
-// export default mockApiService;
+
+export const fetchFleet = async () =>
+  Promise.resolve({
+    result: vehicleData,
+    error: undefined,
+  });
