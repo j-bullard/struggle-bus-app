@@ -70,7 +70,7 @@ const CarNewsRoute = () => {
     const fetchNews = async () => {
       try {
         const res = await fetch(
-          "https://newsapi.org/v2/everything?q=car&apiKey=878c3a81e62c4f409d7e1605b6068ca7",
+          "https://newsapi.org/v2/everything?q=car&apiKey=[]}",
         );
         if (!res.ok) {
           throw new Error("Network response failed");
