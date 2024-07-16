@@ -2,9 +2,14 @@ import { useFleetContext } from "@/contexts/FleetContext";
 import { Box, Heading } from "@chakra-ui/react";
 import Swal from "sweetalert2";
 import FleetTable from "@/components/Home/FleetTable";
+import { useEffect } from "react";
 
 const HomeRoute = () => {
   const { fleet, removeFromFleet } = useFleetContext();
+
+  useEffect(() => {
+    document.title = "Home | Struggle Bus";
+  }, []);
 
   const handleRemoveVehicle = (vin) => {
     Swal.fire({
@@ -23,17 +28,19 @@ const HomeRoute = () => {
   };
 
   return (
-    <Box>
-      <Box sx={{ paddingTop: "2rem", paddingBottom: "2rem" }}>
-        <Heading as="h2">Current Fleet</Heading>
-      </Box>
+    <>
+      <Box>
+        <Box sx={{ paddingTop: "2rem", paddingBottom: "2rem" }}>
+          <Heading as="h2">Current Fleet</Heading>
+        </Box>
 
-      {fleet.length === 0 ? (
-        <p>There are no vehicles currently in the fleet.</p>
-      ) : (
-        <FleetTable fleet={fleet} onRemoveVehicle={handleRemoveVehicle} />
-      )}
-    </Box>
+        {fleet.length === 0 ? (
+          <p>There are no vehicles currently in the fleet.</p>
+        ) : (
+          <FleetTable fleet={fleet} onRemoveVehicle={handleRemoveVehicle} />
+        )}
+      </Box>
+    </>
   );
 };
 
