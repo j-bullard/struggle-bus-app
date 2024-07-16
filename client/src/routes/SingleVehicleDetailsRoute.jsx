@@ -7,10 +7,13 @@ import {
   UnorderedList,
   List,
   ListItem,
+  Stack,
+  Image,
 } from "@chakra-ui/react";
 
 const SingleVehicleDetailsRoute = () => {
   const [carDetails, setCarDetails] = useState();
+  const [loading, setLoading] = useState(true);
   const { vin } = useParams();
 
   useEffect(() => {
@@ -18,75 +21,122 @@ const SingleVehicleDetailsRoute = () => {
       .then((res) => res.json())
       .then((data) => {
         setCarDetails(data);
+        setLoading(false);
       });
   }, [vin]);
 
-  if (!carDetails) {
+  if (loading) {
     return <p>Loading...</p>;
   }
 
   return (
     <>
       <Box className="DetailsPage">
-        <Heading>
-          {" "}
-          {console.log(carDetails)}
+        <Heading textDecorationLine="underline">
           {carDetails.year} {carDetails.make_model.make.name}{" "}
           {carDetails.make_model.name}
         </Heading>
-        <p>
-          <strong>{carDetails.description}</strong>
-        </p>
-        <img src={carDetails.image} alt="Car Image" />
-        <List>
-          <UnorderedList className="DetailsList">
-            <ListItem>
-              Body Type: {carDetails.make_model_trim_body.type}
-            </ListItem>
-            <ListItem>Trim: {carDetails.name}</ListItem>
-            <ListItem>VIN: {carDetails.vin}</ListItem>
-            <ListItem>Doors: {carDetails.make_model_trim_body.doors}</ListItem>
-            <ListItem>Seats: {carDetails.make_model_trim_body.seats}</ListItem>
-            <ListItem>
-              Cargo Capacity: {carDetails.make_model_trim_body.cargo_capacity}
-            </ListItem>
-            <ListItem>
-              Max Cargo (lbs):{" "}
-              {carDetails.make_model_trim_body.max_cargo_capacity}
-            </ListItem>
-            <ListItem>
-              Max Payload (lbs): {carDetails.make_model_trim_body.max_payload}
-            </ListItem>
-            <ListItem>
-              Max Towing (lbs):{" "}
-              {carDetails.make_model_trim_body.max_towing_capacity}
-            </ListItem>
-            <ListItem>MSRP: {carDetails.msrp}</ListItem>
-            <ListItem>
-              {" "}
-              Combined MPG (Gasoline):{" "}
-              {carDetails.make_model_trim_mileage.combined_mpg}
-            </ListItem>
-            <ListItem>
-              {" "}
-              Combined MPG (Electric):{" "}
-              {carDetails.make_model_trim_mileage.epa_combined_mpg_electric}
-            </ListItem>
-            <ListItem>
-              Engine Type: {carDetails.make_model_trim_engine.engine_type}
-            </ListItem>
-            <ListItem>
-              Fuel Type: {carDetails.make_model_trim_engine.fuel_type}
-            </ListItem>
-            <ListItem>
-              Drive Type: {carDetails.make_model_trim_engine.drive_type}
-            </ListItem>
-            <ListItem>
-              Transmission: {carDetails.make_model_trim_engine.transmission}
-            </ListItem>
-          </UnorderedList>
-        </List>
-        <List>
+        <Box className="CarDescription" textDecorationLine="underline">
+          {" "}
+          {carDetails.description}
+        </Box>
+        <Stack spacing={10} direction="row">
+          <Box>
+            <Image
+              boxSize="400px"
+              boxShadow="10px 10px 5px grey"
+              objectFit="scale-down"
+              border
+              src={carDetails.image}
+              alt="Car Image"
+            />
+          </Box>
+
+          <List>
+            <Box h="40px" bg="transparent">
+              <Heading as="h2" size="2x1">
+                Vehicle Details
+              </Heading>
+              <UnorderedList
+                className="DetailsList"
+                sx={{
+                  marginLeft: "50px",
+                }}
+              >
+                <ListItem>
+                  <strong>Body Type:</strong>{" "}
+                  {carDetails.make_model_trim_body.type}
+                </ListItem>
+                <ListItem>
+                  <strong>Trim:</strong> {carDetails.name}
+                </ListItem>
+                <ListItem>
+                  <strong>VIN: </strong>
+                  {carDetails.vin}
+                </ListItem>
+                <ListItem>
+                  <strong>Doors:</strong>{" "}
+                  {carDetails.make_model_trim_body.doors}
+                </ListItem>
+                <ListItem>
+                  <strong>Seats:</strong>{" "}
+                  {carDetails.make_model_trim_body.seats}
+                </ListItem>
+                <ListItem>
+                  <strong>Cargo Capacity:</strong>{" "}
+                  {carDetails.make_model_trim_body.cargo_capacity}
+                </ListItem>
+                <ListItem>
+                  <strong>Max Cargo (lbs):</strong>{" "}
+                  {carDetails.make_model_trim_body.max_cargo_capacity}
+                </ListItem>
+                <ListItem>
+                  <strong>Max Payload (lbs):</strong>{" "}
+                  {carDetails.make_model_trim_body.max_payload}
+                </ListItem>
+                <ListItem>
+                  <strong>Max Towing (lbs):</strong>{" "}
+                  {carDetails.make_model_trim_body.max_towing_capacity}
+                </ListItem>
+                <ListItem>
+                  <strong>MSRP: </strong>
+                  {carDetails.msrp}
+                </ListItem>
+                <ListItem>
+                  {" "}
+                  <strong>Combined MPG (Gasoline):</strong>{" "}
+                  {carDetails.make_model_trim_mileage.combined_mpg}
+                </ListItem>
+                <ListItem>
+                  {" "}
+                  <strong>Combined MPG (Electric):</strong>{" "}
+                  {carDetails.make_model_trim_mileage.epa_combined_mpg_electric}
+                </ListItem>
+                <ListItem>
+                  <strong>Engine Type:</strong>{" "}
+                  {carDetails.make_model_trim_engine.engine_type}
+                </ListItem>
+                <ListItem>
+                  <strong>Fuel Type:</strong>{" "}
+                  {carDetails.make_model_trim_engine.fuel_type}
+                </ListItem>
+                <ListItem>
+                  <strong>Drive Type:</strong>{" "}
+                  {carDetails.make_model_trim_engine.drive_type}
+                </ListItem>
+                <ListItem>
+                  <strong>Transmission:</strong>{" "}
+                  {carDetails.make_model_trim_engine.transmission}
+                </ListItem>
+              </UnorderedList>
+            </Box>
+          </List>
+        </Stack>
+        <List
+          sx={{
+            marginTop: "40px",
+          }}
+        >
           {carDetails.make_model_trim_body.type === "Sedan" && (
             <>
               <Heading as="h2" size="2x1">

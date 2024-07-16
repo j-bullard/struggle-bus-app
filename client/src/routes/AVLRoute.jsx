@@ -1,6 +1,5 @@
 import { usDollar } from "@/utils/currency";
 import { useEffect, useState } from "react";
-import AddVehicleButton from "@/components/ApprovedVehicleList/AddVehicleButton";
 import {
   Box,
   Button,
@@ -21,13 +20,14 @@ import {
   Thead,
   Tr,
 } from "@chakra-ui/react";
-import InfoButton from "@/components/ApprovedVehicleList/InfoButton";
+import VehicleInfoButton from "@/components/AVL/VehicleInfoButton";
+import AddVehicleButton from "@/components/AVL/AddVehicleButton";
 
 const AVLRoute = () => {
   const [selectedYear, setSelectedYear] = useState(2020);
   const [selectedMake, setSelectedMake] = useState();
   const [selectedModel, setSelectedModel] = useState();
-  const [years, _] = useState([2020, 2019, 2018, 2017, 2016, 2015]);
+  const [years] = useState([2020, 2019, 2018, 2017, 2016, 2015]);
   const [makes, setMakes] = useState([]);
   const [models, setModels] = useState([]);
 
@@ -74,7 +74,7 @@ const AVLRoute = () => {
     };
 
     fetchModels();
-  }, [selectedMake]);
+  }, [selectedMake, selectedYear]);
 
   const formDisabled = Boolean(
     !selectedYear || !selectedMake || !selectedModel,
@@ -218,7 +218,7 @@ const AVLRoute = () => {
                   <Td>{usDollar.format(trim.msrp)}</Td>
                   <Td>
                     <ButtonGroup>
-                      <InfoButton trimId={trim.id} />
+                      <VehicleInfoButton trimId={trim.id} />
                       <AddVehicleButton trimId={trim.id} />
                     </ButtonGroup>
                   </Td>

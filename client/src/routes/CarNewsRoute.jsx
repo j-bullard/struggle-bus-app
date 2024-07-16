@@ -5,7 +5,13 @@ import {
   ListItem,
   Heading,
   Box,
+  Image,
   Stack,
+  Grid,
+  GridItem,
+  Card,
+  CardBody,
+  Text,
 } from "@chakra-ui/react";
 
 const cleanCarNews = (articles) => {
@@ -93,21 +99,37 @@ const CarNewsRoute = () => {
           <Heading>Car Related News</Heading>
         </Stack>
         <Stack mb={5}>
-          <List>
-            <UnorderedList className="newsList">
-              {news.map((article, index) => (
-                <ListItem className="newsArticle" key={index}>
-                  <a
-                    href={article.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    {article.title}
-                  </a>
-                </ListItem>
-              ))}
-            </UnorderedList>
-          </List>
+          {/* <List> */}
+          <Grid className="newsList" templateColumns="repeat(3, 1fr)" gap={6}>
+            {/* <UnorderedList className="newsList"> */}
+            {news.map((article, index) => (
+              <GridItem className="newsArticle" key={index}>
+                <Card
+                  as={"a"}
+                  href={article.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <CardBody>
+                    <Image
+                      borderRadius="lg"
+                      // boxSize="300px"
+                      // boxShadow="6px 6px 3px grey"
+                      // objectFit="scale-down"
+                      // border
+                      src={
+                        article.urlToImage
+                          ? article.urlToImage
+                          : "/images/mater.jpg"
+                      }
+                      alt="Car Image"
+                    />
+                    <Text>{article.title}</Text>
+                  </CardBody>
+                </Card>
+              </GridItem>
+            ))}
+          </Grid>
         </Stack>
       </Box>
     </>

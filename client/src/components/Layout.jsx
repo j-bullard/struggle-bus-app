@@ -39,6 +39,7 @@ const Layout = () => {
             background="black"
             color="white"
             p={2}
+            borderRadius="lg"
           >
             Struggle
           </Heading>
