@@ -1,9 +1,15 @@
 {
   "compilerOptions": {
+    "module": "ES6",
+    "moduleResolution": "node",
     "baseUrl": ".",
     "paths": {
       "@/*": ["./src/*"]
     }
   },
-  "include": ["src/**/*.js", "src/**/*.jsx"]
+  "typeAcquisition": {
+    "include": ["jest"]
+  },
+  "include": ["src/**/*.js", "src/**/*.jsx"],
+  "exclude": ["node_modules"]
 }
