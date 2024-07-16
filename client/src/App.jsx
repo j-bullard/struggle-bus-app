@@ -1,12 +1,12 @@
 import { Routes, Route } from "react-router-dom";
 import Layout from "@/components/Layout";
 import { FleetProvider } from "@/contexts/FleetContext";
-import SingleVehicleDetails from "@/components/SingleVehicleDetails";
-import CarNews from "@/components/CarNews";
-import CurrentFleet from "@/components/CurrentFleet";
 import { ChakraProvider } from "@chakra-ui/react";
 import theme from "@/theme";
-import ApprovedVehicleList from "@/components/ApprovedVehicleList";
+import HomeRoute from "@/routes/HomeRoute";
+import CarNewsRoute from "@/routes/CarNewsRoute";
+import AVLRoute from "@/routes/AVLRoute";
+import SingleVehicleDetailsRoute from "@/routes/SingleVehicleDetailsRoute";
 
 const App = () => {
   return (
@@ -14,10 +14,13 @@ const App = () => {
       <FleetProvider>
         <Routes>
           <Route path="/" element={<Layout />}>
-            <Route index element={<CurrentFleet />} />
-            <Route path="vehicles/:vin" element={<SingleVehicleDetails />} />
-            <Route path="avl" element={<ApprovedVehicleList />} />
-            <Route path="news" element={<CarNews />} />
+            <Route index element={<HomeRoute />} />
+            <Route
+              path="vehicles/:vin"
+              element={<SingleVehicleDetailsRoute />}
+            />
+            <Route path="avl" element={<AVLRoute />} />
+            <Route path="news" element={<CarNewsRoute />} />
           </Route>
         </Routes>
       </FleetProvider>

@@ -1,7 +1,7 @@
 import React from "react";
 import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import CarNews from "./CarNews";
+import CarNewsRoute from "@/routes/CarNewsRoute";
 
 const mockArticles = [
   {
@@ -30,7 +30,7 @@ afterEach(() => {
 });
 
 test("As a User, when I click on News, I should see a list of articles for me to click on", async () => {
-  renderMatches(<CarNews />);
+  render(<CarNewsRoute />);
 
   await waitFor(() => {
     expect(screen.getByText("Car News 1")).toBeInTheDocument();

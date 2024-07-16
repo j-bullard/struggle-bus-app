@@ -40,7 +40,7 @@ const cleanCarNews = (articles) => {
   );
 };
 
-const CarNews = () => {
+const CarNewsRoute = () => {
   const [news, setNews] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -89,4 +89,5 @@ const CarNews = () => {
   );
 };
 
-export default CarNews;
+export { CarNewsRoute };
+export default CarNewsRoute;

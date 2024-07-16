@@ -9,7 +9,7 @@ import {
   ListItem,
 } from "@chakra-ui/react";
 
-const SingleVehicleDetails = () => {
+const SingleVehicleDetailsRoute = () => {
   const [carDetails, setCarDetails] = useState();
   const { vin } = useParams();
 
@@ -196,5 +196,5 @@ const SingleVehicleDetails = () => {
   );
 };
 
-export { SingleVehicleDetails };
-export default SingleVehicleDetails;
+export { SingleVehicleDetailsRoute };
+export default SingleVehicleDetailsRoute;

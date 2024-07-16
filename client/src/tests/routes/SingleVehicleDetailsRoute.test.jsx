@@ -1,9 +1,8 @@
 import App from "./App";
-import apiService from "./services/api_service.js";
-import userEvent from "@testing-library/user-event";
 import { render, screen, waitFor } from "@testing-library/react";
 import { FleetProvider } from "@/contexts/FleetContext";
 import { MemoryRouter } from "react-router-dom";
+import SingleVehicleDetailsRoute from "@/routes/SingleVehicleDetailsRoute";
 
 test("As a fleet manager, when I click on a vehicle, I should see its detailed specifications including make, model, year and maintenance schedule", async () => {
   const vin = "1GNEL19X73B130926";
@@ -11,7 +10,7 @@ test("As a fleet manager, when I click on a vehicle, I should see its detailed s
   render(
     <MemoryRouter initialEntries={[`/vehicles/${vin}`]}>
       <FleetProvider value={{ fleet: mockCarData }}>
-        <SingleVehicleDetails />
+        <SingleVehicleDetailsRoute />
       </FleetProvider>
     </MemoryRouter>,
   );

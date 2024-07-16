@@ -22,7 +22,7 @@ import {
 } from "@chakra-ui/react";
 import InfoButton from "@/components/ApprovedVehicleList/InfoButton";
 
-const ApprovedVehicleList = () => {
+const AVLRoute = () => {
   const [selectedYear, setSelectedYear] = useState(2020);
   const [selectedMake, setSelectedMake] = useState();
   const [selectedModel, setSelectedModel] = useState();
@@ -224,5 +224,5 @@ const ApprovedVehicleList = () => {
   );
 };
 
-export { ApprovedVehicleList };
-export default ApprovedVehicleList;
+export { AVLRoute };
+export default AVLRoute;

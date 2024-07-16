@@ -1,6 +1,6 @@
-import React from "react";
 import { render, screen, waitFor } from "@testing-library/react";
 import { FleetProvider } from "@/contexts/FleetContext";
+import { HomeRoute } from "@/routes/HomeRoute";
 
 const mockFleet = [
   {
@@ -12,9 +12,9 @@ const mockFleet = [
 ];
 
 test("As a fleet manager, I should see a list of all the vehicles currently in my fleet.", async () => {
-  renderMatches(
+  render(
     <FleetProvider value={{ fleet: mockFleet }}>
-      <CurrentFleet />
+      <HomeRoute />
     </FleetProvider>,
   );
 
@@ -25,7 +25,3 @@ test("As a fleet manager, I should see a list of all the vehicles currently in m
     expect(screen.getByText("FE + S")).toBeInTheDocument();
   });
 });
-
-// test('As a fleet manager, when I click on the information button for a car, I expect to see the single vehicle details page', async
-
-// //test icon button that takes to vehicle by vin

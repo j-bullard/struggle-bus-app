@@ -2,8 +2,8 @@ import { render, waitFor } from "@testing-library/react";
 import { fetchFleet } from "@/services/fleetService";
 import { FleetProvider } from "@/contexts/FleetContext";
 import { mockData } from "@/services/__mocks__/mockData";
-import CurrentFleet from "@/components/CurrentFleet";
 import { MemoryRouter } from "react-router-dom";
+import HomeRoute from "@/routes/HomeRoute";
 
 describe("FleetProvider", () => {
   beforeEach(() => {
@@ -16,7 +16,7 @@ describe("FleetProvider", () => {
     const { getByText } = render(
       <MemoryRouter>
         <FleetProvider>
-          <CurrentFleet />
+          <HomeRoute />
         </FleetProvider>
       </MemoryRouter>,
     );
